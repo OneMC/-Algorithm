@@ -59,3 +59,31 @@ class Solution2 {
 }
 print(Solution().lengthOfLongestSubstring("abcabcbbxwwfsdfewrj4ew4rewfdsfvcdsr324324vscfdsfscdsfdsrew4e32"))
 print(Solution2().lengthOfLongestSubstring("abcabcbbxwwfsdfewrj4ew4rewfdsfvcdsr324324vscfdsfscdsfdsrew4e32"))
+
+
+/*
+ 最长公共前缀。
+ 输入: ["flower","flow","flight"]
+ 输出: "fl"
+ 所有输入只包含小写字母 a-z 。
+ 链接：https://leetcode-cn.com/problems/longest-common-prefix
+ */
+class LongestPrefixSolution {
+    func longestCommonPrefix(_ strs: [String]) -> String {
+        var prefixAry = Array.init(strs.first!)
+        for word in strs {
+            for (index,value) in word.enumerated() {
+                guard prefixAry.count > index  else {
+                    break
+                }
+                if prefixAry[index] != value {
+                    prefixAry.removeSubrange(index..<prefixAry.count)
+                    break
+                }
+            }
+        }
+        return prefixAry.reduce("", { $0 + String.init($1) })
+    }
+}
+
+LongestPrefixSolution().longestCommonPrefix(["flower","flow","flight"])
